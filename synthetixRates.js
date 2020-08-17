@@ -81,9 +81,9 @@ const getData = () => {
     });
   };
 
-  cron.schedule("*/5 * * * *", () => {
+  cron.schedule("*/3 * * * *", () => {
     console.log("------");
-    console.log("running a task every 5 mins");
+    console.log("running a task every 3 mins");
     fetchQuery();
     xauBot.getData(sXAU, sXAURate);
     xagBot.getData(sXAG, sXAGRate);
