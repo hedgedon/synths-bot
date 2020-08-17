@@ -5,7 +5,7 @@ const getData = (sDEFI, sDEFIRate) => {
   const Discord = require("discord.js");
   const client = new Discord.Client();
   const token = process.env.SDEFI_TOKEN;
-  const serverId = process.env.SERVER_ID;
+  const serverId = process.env.SERVER_DHEDGE_ID;
 
   async function fetchIt() {
     const guild = client.guilds.cache.get(`${serverId}`);
