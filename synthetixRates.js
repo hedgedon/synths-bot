@@ -81,10 +81,10 @@ const getData = () => {
     });
   };
 
-  cron.schedule("*/3 * * * *", () => {
+  cron.schedule("*/1 * * * *", () => {
     console.log("------");
     console.log(
-      timestamp.utc("[YYYY/MM/DD:mm:ss]") + "running a task every 3 mins"
+      timestamp.utc("[YYYY/MM/DD:mm:ss]") + "running a task every 1 minute"
     );
     fetchQuery();
     xauBot.getData(sXAU, sXAURate);
