@@ -1,13 +1,11 @@
 require("dotenv").config();
-const cron = require("node-cron");
-const timestamp = require("time-stamp");
 
 const getData = (sDEFI, sDEFIRate) => {
   // Discord.js Config
   const Discord = require("discord.js");
   const client = new Discord.Client();
   const token = process.env.SDEFI_TOKEN;
-  const serverId = process.env.DEV_SERVER_ID;
+  const serverId = process.env.SERVER_ID;
 
   async function fetchIt() {
     const guild = client.guilds.cache.get(`${serverId}`);

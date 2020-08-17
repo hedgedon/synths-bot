@@ -1,22 +1,20 @@
 require("dotenv").config();
-const cron = require("node-cron");
-const timestamp = require("time-stamp");
 
-const getData = (sXAU, sXAURate) => {
+const getData = (sXAG, sXAGRate) => {
   // Discord.js Config
   const Discord = require("discord.js");
   const client = new Discord.Client();
-  const token = process.env.SXAU_TOKEN;
-  const serverId = process.env.DEV_SERVER_ID;
+  const token = process.env.SXAG_TOKEN;
+  const serverId = process.env.SERVER_ID;
 
   async function fetchIt() {
     const guild = client.guilds.cache.get(`${serverId}`);
 
     // SET BOT NAME
-    guild.me.setNickname(`$${sXAURate} `);
+    guild.me.setNickname(`$${sXAGRate} `);
 
     // SET ACTIVITY
-    client.user.setActivity(`${sXAU}`, {
+    client.user.setActivity(`${sXAG}`, {
       type: "PLAYING",
     });
   }

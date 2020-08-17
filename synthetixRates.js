@@ -4,9 +4,9 @@ const cron = require("node-cron");
 
 const { ethers } = require("ethers");
 
-const xauBot = require("./xauBot");
-const xagBot = require("./xagBot");
-const defiBot = require("./defiBot");
+const xauBot = require("./synths/xauBot");
+const xagBot = require("./synths/xagBot");
+const defiBot = require("./synths/defiBot");
 
 const query = gql`
   {
@@ -83,7 +83,9 @@ const getData = () => {
 
   cron.schedule("*/3 * * * *", () => {
     console.log("------");
-    console.log("running a task every 3 mins");
+    console.log(
+      timestamp.utc("[YYYY/MM/DD:mm:ss]") + "running a task every 3 mins"
+    );
     fetchQuery();
     xauBot.getData(sXAU, sXAURate);
     xagBot.getData(sXAG, sXAGRate);
