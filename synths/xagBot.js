@@ -10,13 +10,13 @@ const getData = (sXAG, sXAGRate) => {
   // ** INVOKE DISCORD BOT **
   client.on("ready", () => {
     console.log("Discord bot is Online, please wait while fetching data");
-    const guild = client.guilds.cache.get(serverId);
+    const guild = client.guilds.cache.get(`${serverId}`);
 
     // SET BOT NAME
     guild.me.setNickname(`$${sXAGRate} `);
 
     // SET ACTIVITY
-    client.user.setActivity(`${sXAG}/sUSD`, {
+    client.user.setActivity(`${sXAG}`, {
       type: "PLAYING",
     });
   });
