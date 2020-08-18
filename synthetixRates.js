@@ -84,7 +84,7 @@ const getData = () => {
   cron.schedule("*/60 * * * * *", () => {
     console.log("------");
     console.log(
-      timestamp.utc("[YYYY/MM/DD:mm:ss]") + "running a task every 30 sec"
+      timestamp.utc("[YYYY/MM/DD:mm:ss]") + "running a task every 60 sec"
     );
     fetchQuery();
     xauBot.getData(sXAU, sXAURate);
