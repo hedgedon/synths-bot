@@ -7,7 +7,9 @@ const getData = (sDEFI, sDEFIRate) => {
   const token = process.env.SDEFI_TOKEN;
   const serverId = process.env.SERVER_ID;
 
-  async function fetchIt() {
+  // ** INVOKE DISCORD BOT **
+  client.on("ready", () => {
+    console.log("Discord bot is Online, please wait while fetching data");
     const guild = client.guilds.cache.get(`${serverId}`);
 
     // SET BOT NAME
@@ -17,12 +19,6 @@ const getData = (sDEFI, sDEFIRate) => {
     client.user.setActivity(`${sDEFI}`, {
       type: "PLAYING",
     });
-  }
-
-  // ** INVOKE DISCORD BOT **
-  client.on("ready", () => {
-    console.log("Discord bot is Online, please wait while fetching data");
-    fetchIt();
   });
 
   client.login(token);

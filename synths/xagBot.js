@@ -7,22 +7,18 @@ const getData = (sXAG, sXAGRate) => {
   const token = process.env.SXAG_TOKEN;
   const serverId = process.env.SERVER_ID;
 
-  async function fetchIt() {
-    const guild = client.guilds.cache.get(`${serverId}`);
+  // ** INVOKE DISCORD BOT **
+  client.on("ready", () => {
+    console.log("Discord bot is Online, please wait while fetching data");
+    const guild = client.guilds.cache.get(serverId);
 
     // SET BOT NAME
     guild.me.setNickname(`$${sXAGRate} `);
 
     // SET ACTIVITY
-    client.user.setActivity(`${sXAG}`, {
+    client.user.setActivity(`${sXAG}/sUSD`, {
       type: "PLAYING",
     });
-  }
-
-  // ** INVOKE DISCORD BOT **
-  client.on("ready", () => {
-    console.log("Discord bot is Online, please wait while fetching data");
-    fetchIt();
   });
 
   client.login(token);
