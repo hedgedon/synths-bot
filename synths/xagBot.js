@@ -5,7 +5,7 @@ const getData = (sXAG, sXAGRate) => {
   const Discord = require("discord.js");
   const client = new Discord.Client();
   const token = process.env.SXAG_TOKEN;
-  const serverId = process.env.SERVER_DHEDGE_ID;
+  const serverId = process.env.SERVER_ID;
 
   // ** INVOKE DISCORD BOT **
   client.on("ready", () => {
