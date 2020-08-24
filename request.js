@@ -88,9 +88,9 @@ const getData = () => {
       timestamp.utc("[YYYY/MM/DD:mm:ss]") + "running a task every 60 sec"
     );
     fetchQuery();
-    xauBot.getData(sXAU, sXAURate);
-    // xagBot.getData(sXAG, sXAGRate);
-    // defiBot.getData(sDEFI, sDEFIRate);
+    xauBot.setBot(sXAU, sXAURate);
+    // xagBot.setBot(sXAG, sXAGRate);
+    // defiBot.getBot(sDEFI, sDEFIRate);
   });
 };
 exports.getData = getData;
