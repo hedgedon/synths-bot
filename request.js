@@ -6,7 +6,7 @@ const { ethers } = require("ethers");
 
 const xauBot = require("./synths/xauBot");
 const xagBot = require("./synths/xagBot");
-// const defiBot = require("./synths/defiBot");
+const defiBot = require("./synths/defiBot");
 
 const query = gql`
   {
@@ -52,8 +52,8 @@ let sXAURate = 0;
 let sXAG = "";
 let sXAGRate = 0;
 
-// let sDEFI = "";
-// let sDEFIRate = 0;
+let sDEFI = "";
+let sDEFIRate = 0;
 
 const getData = () => {
   const fetchQuery = () => {
@@ -66,19 +66,19 @@ const getData = () => {
       sXAG = data.xag[0].synth;
       sXAGRate = Number(ethers.utils.formatEther(data.xag[0].rate)).toFixed(2);
 
-      // sDEFI = data.sdefi[0].synth;
-      // sDEFIRate = Number(ethers.utils.formatEther(data.sdefi[0].rate)).toFixed(
-      //   2
-      // );
+      sDEFI = data.sdefi[0].synth;
+      sDEFIRate = Number(ethers.utils.formatEther(data.sdefi[0].rate)).toFixed(
+        2
+      );
 
       console.log(sXAU, sXAURate);
       console.log(sXAG, sXAGRate);
-      // console.log(sDEFI, sDEFIRate);
+      console.log(sDEFI, sDEFIRate);
 
       console.log(`*fetched at: ${timeStamp}`);
 
-      // return { sXAU, sXAURate, sXAG, sXAGRate, sDEFI, sDEFIRate };
-      return { sXAU, sXAURate, sXAG, sXAGRate };
+      return { sXAU, sXAURate, sXAG, sXAGRate, sDEFI, sDEFIRate };
+      // return { sXAU, sXAURate, sXAG, sXAGRate };
     });
   };
 
@@ -90,7 +90,7 @@ const getData = () => {
     fetchQuery();
     xauBot.setBot(sXAU, sXAURate);
     xagBot.setBot(sXAG, sXAGRate);
-    // defiBot.getBot(sDEFI, sDEFIRate);
+    defiBot.setBot(sDEFI, sDEFIRate);
   });
 };
 exports.getData = getData;
