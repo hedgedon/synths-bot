@@ -2,7 +2,7 @@ require("dotenv").config();
 // Discord.js Config
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const token = process.env.TEST_TOKEN;
+const token = process.env.SXAU_TOKEN;
 const serverId = process.env.SERVER_ID;
 client.login(token);
 
