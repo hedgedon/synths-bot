@@ -32,7 +32,7 @@ async function setBot(sXAU, sXAURate) {
     console.log(`logging from bot sXAU: ${sXAURate}`);
 
     // SET BOT NAME
-    guild.me.setNickname(` ${sXAURate} `);
+    guild.me.setNickname(`$${sXAURate}`);
 
     // SET ACTIVITY
     client.user.setActivity(`${sXAU}`, {
