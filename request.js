@@ -78,7 +78,6 @@ const getData = () => {
       console.log(`*fetched at: ${timeStamp}`);
 
       return { sXAU, sXAURate, sXAG, sXAGRate, sDEFI, sDEFIRate };
-      // return { sXAU, sXAURate, sXAG, sXAGRate };
     });
   };
 
