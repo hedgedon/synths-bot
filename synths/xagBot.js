@@ -32,10 +32,10 @@ async function setBot(sXAG, sXAGRate) {
     console.log(`logging from bot sXAG: ${sXAGRate}`);
 
     // SET BOT NAME
-    guild.me.setNickname(`$${sXAGRate}`);
+    await guild.me.setNickname(`$${sXAGRate}`);
 
     // SET ACTIVITY
-    client.user.setActivity(`${sXAG}`, {
+    await client.user.setActivity(`${sXAG}`, {
       type: "PLAYING",
     });
     console.log("executed setBot() to set the name & activity!");
