@@ -16,6 +16,7 @@
     "graphql": "^15.3.0",
     "graphql-request": "^3.0.0",
     "node-cron": "^2.0.3",
+    "pm2": "^4.4.1",
     "time-stamp": "^2.2.0"
   }
 }
