@@ -5,7 +5,7 @@ const cron = require("node-cron");
 const { ethers } = require("ethers");
 
 const xauBot = require("./synths/xauBot");
-// const xagBot = require("./synths/xagBot");
+const xagBot = require("./synths/xagBot");
 // const defiBot = require("./synths/defiBot");
 
 const query = gql`
@@ -49,8 +49,8 @@ const url =
 let sXAU = "";
 let sXAURate = 0;
 
-// let sXAG = "";
-// let sXAGRate = 0;
+let sXAG = "";
+let sXAGRate = 0;
 
 // let sDEFI = "";
 // let sDEFIRate = 0;
@@ -63,8 +63,8 @@ const getData = () => {
       sXAU = data.xau[0].synth;
       sXAURate = Number(ethers.utils.formatEther(data.xau[0].rate)).toFixed(2);
 
-      // sXAG = data.xag[0].synth;
-      // sXAGRate = Number(ethers.utils.formatEther(data.xag[0].rate)).toFixed(2);
+      sXAG = data.xag[0].synth;
+      sXAGRate = Number(ethers.utils.formatEther(data.xag[0].rate)).toFixed(2);
 
       // sDEFI = data.sdefi[0].synth;
       // sDEFIRate = Number(ethers.utils.formatEther(data.sdefi[0].rate)).toFixed(
@@ -72,13 +72,13 @@ const getData = () => {
       // );
 
       console.log(sXAU, sXAURate);
-      // console.log(sXAG, sXAGRate);
+      console.log(sXAG, sXAGRate);
       // console.log(sDEFI, sDEFIRate);
 
       console.log(`*fetched at: ${timeStamp}`);
 
       // return { sXAU, sXAURate, sXAG, sXAGRate, sDEFI, sDEFIRate };
-      return { sXAU, sXAURate };
+      return { sXAU, sXAURate, sXAG, sXAGRate };
     });
   };
 
@@ -89,7 +89,7 @@ const getData = () => {
     );
     fetchQuery();
     xauBot.setBot(sXAU, sXAURate);
-    // xagBot.setBot(sXAG, sXAGRate);
+    xagBot.setBot(sXAG, sXAGRate);
     // defiBot.setBot(sDEFI, sDEFIRate);
   });
 };
