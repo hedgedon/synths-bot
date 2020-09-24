@@ -6,7 +6,8 @@ const { ethers } = require("ethers");
 
 const xauBot = require("./synths/xauBot");
 const xagBot = require("./synths/xagBot");
-// const defiBot = require("./synths/defiBot");
+const defiBot = require("./synths/defiBot");
+const ibtcBot = require("./synths/ibtcBot");
 
 const query = gql`
   {
@@ -40,6 +41,16 @@ const query = gql`
       synth
       rate
     }
+    ibtc: rateUpdates(
+      first: 1
+      orderBy: block
+      orderDirection: desc
+      where: { synth: "iBTC" }
+    ) {
+      block
+      synth
+      rate
+    }
   }
 `;
 
@@ -52,8 +63,11 @@ let sXAURate = 0;
 let sXAG = "";
 let sXAGRate = 0;
 
-// let sDEFI = "";
-// let sDEFIRate = 0;
+let sDEFI = "";
+let sDEFIRate = 0;
+
+let iBTC = "";
+let iBTCRate = 0;
 
 const getData = () => {
   const fetchQuery = () => {
@@ -66,23 +80,28 @@ const getData = () => {
       sXAG = data.xag[0].synth;
       sXAGRate = Number(ethers.utils.formatEther(data.xag[0].rate)).toFixed(2);
 
-      // sDEFI = data.sdefi[0].synth;
-      // sDEFIRate = Number(ethers.utils.formatEther(data.sdefi[0].rate)).toFixed(
-      //   2
-      // );
+      sDEFI = data.sdefi[0].synth;
+      sDEFIRate = Number(ethers.utils.formatEther(data.sdefi[0].rate)).toFixed(
+        2
+      );
+
+      iBTC = data.ibtc[0].synth;
+      iBTCRate = Number(ethers.utils.formatEther(data.ibtc[0].rate)).toFixed(2);
 
       console.log(sXAU, sXAURate);
       console.log(sXAG, sXAGRate);
-      // console.log(sDEFI, sDEFIRate);
+      console.log(sDEFI, sDEFIRate);
+      console.log(iBTC, iBTCRate)
 
       console.log(`*fetched at: ${timeStamp}`);
 
-      // return { sXAU, sXAURate, sXAG, sXAGRate, sDEFI, sDEFIRate };
-      return { sXAU, sXAURate, sXAG, sXAGRate };
+      return { sXAU, sXAURate, sXAG, sXAGRate, sDEFI, sDEFIRate, iBTC, iBTCRate };
+      // return { sXAU, sXAURate, sXAG, sXAGRate };
+      // return { iBTC, iBTCRate };
     });
   };
 
-  cron.schedule("*/60 * * * * *", () => {
+  cron.schedule("*/15 * * * * *", () => {
     console.log("------");
     console.log(
       timestamp.utc("[YYYY/MM/DD:mm:ss]") + "running a task every 60 sec"
@@ -90,7 +109,8 @@ const getData = () => {
     fetchQuery();
     xauBot.setBot(sXAU, sXAURate);
     xagBot.setBot(sXAG, sXAGRate);
-    // defiBot.setBot(sDEFI, sDEFIRate);
+    defiBot.setBot(sDEFI, sDEFIRate);
+    ibtcBot.setBot(iBTC, iBTCRate);
   });
 };
 exports.getData = getData;

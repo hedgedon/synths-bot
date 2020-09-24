@@ -2,8 +2,8 @@ require("dotenv").config();
 // Discord.js Config
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const token = process.env.WHITEROSE_XAG;
-const serverId = process.env.WHITEROSE_SERVER;
+const token = process.env.SXAG_TOKEN;
+const serverId = process.env.SERVER_ID;
 client.login(token);
 
 // ** INVOKE DISCORD BOT **
