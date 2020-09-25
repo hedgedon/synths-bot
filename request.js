@@ -8,6 +8,7 @@ const xauBot = require("./synths/xauBot");
 const xagBot = require("./synths/xagBot");
 const defiBot = require("./synths/defiBot");
 const ibtcBot = require("./synths/ibtcBot");
+const iethBot = require("./synths/iethBot");
 
 const query = gql`
   {
@@ -51,6 +52,16 @@ const query = gql`
       synth
       rate
     }
+    ieth: rateUpdates(
+      first: 1
+      orderBy: block
+      orderDirection: desc
+      where: { synth: "iETH" }
+    ) {
+      block
+      synth
+      rate
+    }
   }
 `;
 
@@ -68,6 +79,9 @@ let sDEFIRate = 0;
 
 let iBTC = "";
 let iBTCRate = 0;
+
+let iETH = "";
+let iETHRate = 0;
 
 const getData = () => {
   const fetchQuery = () => {
@@ -88,16 +102,18 @@ const getData = () => {
       iBTC = data.ibtc[0].synth;
       iBTCRate = Number(ethers.utils.formatEther(data.ibtc[0].rate)).toFixed(2);
 
+      iETH = data.ieth[0].synth;
+      iETHRate = Number(ethers.utils.formatEther(data.ieth[0].rate)).toFixed(2);
+
       console.log(sXAU, sXAURate);
       console.log(sXAG, sXAGRate);
       console.log(sDEFI, sDEFIRate);
-      console.log(iBTC, iBTCRate)
+      console.log(iBTC, iBTCRate);
+      console.log(iETH, iETHRate);
 
       console.log(`*fetched at: ${timeStamp}`);
 
-      return { sXAU, sXAURate, sXAG, sXAGRate, sDEFI, sDEFIRate, iBTC, iBTCRate };
-      // return { sXAU, sXAURate, sXAG, sXAGRate };
-      // return { iBTC, iBTCRate };
+      return { sXAU, sXAURate, sXAG, sXAGRate, sDEFI, sDEFIRate, iBTC, iBTCRate, iETH, iETHRate };
     });
   };
 
@@ -111,6 +127,7 @@ const getData = () => {
     xagBot.setBot(sXAG, sXAGRate);
     defiBot.setBot(sDEFI, sDEFIRate);
     ibtcBot.setBot(iBTC, iBTCRate);
+    iethBot.setBot(iETH, iETHRate);
   });
 };
 exports.getData = getData;
